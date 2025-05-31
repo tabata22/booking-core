@@ -5,4 +5,5 @@ public enum CompanyStatus
     Pending = 0,
     Active = 5,
     Deactivated = 10,
+    Suspended = 15,
 }

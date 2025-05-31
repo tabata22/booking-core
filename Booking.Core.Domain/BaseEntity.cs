@@ -6,7 +6,7 @@ public abstract class BaseEntity
 
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
     
-    public DateTimeOffset CreatedAt { get; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset CreatedAt { get; set; }
     
     public void RaiseEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
     

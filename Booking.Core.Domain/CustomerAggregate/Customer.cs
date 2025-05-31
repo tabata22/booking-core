@@ -7,14 +7,12 @@ public class Customer : BaseEntity
     public Customer(
         Guid id, 
         long companyId,
-        string username, 
         string email, 
         string firstName,
         string lastName)
     {
         Id = id;
         CompanyId = companyId;
-        Username = username;
         Email = email;
         FirstName = firstName;
         LastName = lastName;
@@ -25,8 +23,6 @@ public class Customer : BaseEntity
     public Guid Id { get; private set; }
     
     public long CompanyId { get; private set; }
-    
-    public string Username { get; private set; }
     
     public string Email { get; private set; }
     

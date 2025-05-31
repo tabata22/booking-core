@@ -1,6 +1,6 @@
 namespace Booking.Core.Domain.ServiceAggregate;
 
-public class Service : BaseEntity
+public class Service : AuditableEntity
 {
     public Service(string name, string? description, decimal price, long duration)
     {

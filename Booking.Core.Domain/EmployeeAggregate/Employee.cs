@@ -1,6 +1,6 @@
 namespace Booking.Core.Domain.EmployeeAggregate;
 
-public class Employee : BaseEntity
+public class Employee : AuditableEntity
 {
     public Employee(string firstName, string? lastName)
     {
