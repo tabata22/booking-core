@@ -50,6 +50,8 @@ public class Company : BaseEntity
     
     public ICollection<CompanyService> Services { get; private set; }
     
+    public ICollection<Branch> Branches { get; private set; }
+    
     public void AddService(CompanyService service) => Services.Add(service);
 
     public void Activate()

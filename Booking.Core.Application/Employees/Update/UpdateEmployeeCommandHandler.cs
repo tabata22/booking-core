@@ -22,7 +22,8 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         }
         
         employee.Services.Clear();
-        employee.Update(command.FirstName, command.LastName);
+        
+        employee.Update(command.BranchId, command.FirstName, command.LastName);
         foreach (var serviceId in command.Services)
         {
             var employeeService = new EmployeeService

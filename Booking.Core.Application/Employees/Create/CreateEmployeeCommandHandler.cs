@@ -15,7 +15,7 @@ public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeComman
 
     public async Task<Result> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
     {
-        var employee = new Employee(command.FirstName, command.LastName);
+        var employee = new Employee(command.BranchId, command.FirstName, command.LastName);
         foreach (var serviceId in command.Services)
         {
             var employeeService = new EmployeeService
