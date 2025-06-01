@@ -23,8 +23,6 @@ public class ApplicationDbContext : DbContext
     
     public DbSet<Company> Companies { get; set; }
     
-    public DbSet<CompanyService> CompanyServices { get; set; }
-    
     public DbSet<Employee> Employees { get; set; }
     
     public DbSet<EmployeeService> EmployeeServices { get; set; }

@@ -2,8 +2,15 @@ using Booking.Core.Domain.EmployeeAggregate;
 using CSharpFunctionalExtensions;
 using MediatR;
 
-namespace Booking.Core.Application.Employees.Update;
+namespace Booking.Core.Application.Employees.Commands;
 
+public record UpdateEmployeeCommand(
+    long Id, 
+    long BranchId,
+    string FirstName, 
+    string? LastName, 
+    long[] Services) : IRequest<Result>;
+    
 public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, Result>
 {
     private readonly IEmployeeRepository _repository;

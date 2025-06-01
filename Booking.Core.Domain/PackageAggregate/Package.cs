@@ -1,3 +1,5 @@
+using Booking.Core.Domain.CompanyAggregate;
+
 namespace Booking.Core.Domain.PackageAggregate;
 
 public class Package : AuditableEntity
@@ -18,4 +20,6 @@ public class Package : AuditableEntity
     public string Name { get; private set; }
     
     public decimal Price { get; private set; }
+    
+    public ICollection<Company> Companies { get; private set; }
 }

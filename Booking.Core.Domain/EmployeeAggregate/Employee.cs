@@ -1,3 +1,4 @@
+using Booking.Core.Domain.BranchAggregate;
 using Booking.Core.Domain.CompanyAggregate;
 using Booking.Core.Domain.CustomerAggregate;
 

@@ -14,34 +14,33 @@ public static class ServiceCollections
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration  configuration)
     {
-        services.AddAuthentication(options => 
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer("Bearer", options =>
-            {
-                options.Authority = "http://localhost:8081/realms/booking";
-                options.RequireHttpsMetadata = false; // only in dev
-                options.Audience = "core-api";
-            });
-
-        services.AddAuthorizationBuilder()
-            .AddPolicy(AuthorizationPolicies.AdminPolicy, policy => policy
-                    .RequireAuthenticatedUser()
-                    .RequireRole("admin"))
-            .AddPolicy(AuthorizationPolicies.CustomerPolicy, policy => policy
-                    .RequireAuthenticatedUser()
-                    .RequireRole("customer"));
-        
+        // services.AddAuthentication(options => 
+        //     {
+        //         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        //     })
+        //     .AddJwtBearer("Bearer", options =>
+        //     {
+        //         options.Authority = "http://localhost:8081/realms/booking";
+        //         options.RequireHttpsMetadata = false; // only in dev
+        //         options.Audience = "core-api";
+        //     });
+        //
+        // services.AddAuthorizationBuilder()
+        //     .AddPolicy(AuthorizationPolicies.AdminPolicy, policy => policy
+        //             .RequireAuthenticatedUser()
+        //             .RequireRole("admin"))
+        //     .AddPolicy(AuthorizationPolicies.CustomerPolicy, policy => policy
+        //             .RequireAuthenticatedUser()
+        //             .RequireRole("customer"));
+        //
         services.AddHttpContextAccessor();
 
         services.AddScoped<IBlobService, BlobService>();
         services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IIdentityProviderService, IdentityProviderService>();
 
-        services.AddSingleton<IServiceCache, ServiceCache>();
+        //services.AddSingleton<IServiceCache, ServiceCache>();
         
         return services;
     }

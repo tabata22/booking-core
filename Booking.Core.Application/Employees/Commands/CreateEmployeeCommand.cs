@@ -2,7 +2,13 @@ using Booking.Core.Domain.EmployeeAggregate;
 using CSharpFunctionalExtensions;
 using MediatR;
 
-namespace Booking.Core.Application.Employees.Create;
+namespace Booking.Core.Application.Employees.Commands;
+
+public record CreateEmployeeCommand(
+    long BranchId,
+    string FirstName,
+    string? LastName, 
+    long[] Services) : IRequest<Result>;
 
 public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, Result>
 {

@@ -1,7 +1,6 @@
-using Booking.Core.Application.Employees.Create;
-using Booking.Core.Application.Employees.Delete;
-using Booking.Core.Application.Employees.Update;
+using Booking.Core.Application.Employees.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.Core.Api.Endpoints;
 
@@ -13,8 +12,8 @@ public static class EmployeeEndpoints
             .WithTags("Employee");
         
         employeeGroup.MapPost("/", async (
-            IMediator mediator,
-            CreateEmployeeCommand command,
+            [FromServices] IMediator mediator,
+            [FromBody] CreateEmployeeCommand command,
             CancellationToken cancellationToken = default
         ) =>
         {
@@ -28,8 +27,8 @@ public static class EmployeeEndpoints
         });
         
         employeeGroup.MapPut("/", async (
-            IMediator mediator,
-            UpdateEmployeeCommand command,
+            [FromServices] IMediator mediator,
+            [FromBody] UpdateEmployeeCommand command,
             CancellationToken cancellationToken = default
         ) =>
         {
@@ -43,7 +42,7 @@ public static class EmployeeEndpoints
         });
         
         employeeGroup.MapDelete("{id:long}", async (
-            IMediator mediator,
+            [FromServices] IMediator mediator,
             long id,
             CancellationToken cancellationToken = default
         ) =>

@@ -5,14 +5,11 @@ using MediatR;
 namespace Booking.Core.Application.Companies.Commands;
 
 public record CreateCompanyCommand(
+    long PackageId,
     string IdentificationCode,
     string Name,
     CompanyActivityType CompanyActivityType,
-    string? Description,
-    string Address, 
-    double? Latitude,
-    double? Longitude, 
-    string? GoogleMapPlaceId) : IRequest<Result>;
+    string? Description) : IRequest<Result>;
     
 public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, Result>
 {
@@ -32,16 +29,12 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
         }
 
         var company = new Company(
-            1,
+            command.PackageId,
             command.IdentificationCode,
             command.Name,
             command.CompanyActivityType,
             null,
-            command.Description,
-            command.Address,
-            command.Latitude,
-            command.Longitude,
-            command.GoogleMapPlaceId
+            command.Description
         );
         
         await _repository.AddAsync(company, cancellationToken);

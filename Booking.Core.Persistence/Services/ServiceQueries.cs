@@ -16,7 +16,7 @@ public class ServiceQueries : IServiceQueries
     {
         return await _dbContext.Services
             .AsNoTracking()
-            .Where(x => x.CompanyId == companyId)
+            .Where(x => x.BranchId == companyId)
             .Select(x => new GetServiceDto
             {
                 Id = x.Id,

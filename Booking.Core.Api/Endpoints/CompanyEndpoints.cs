@@ -2,6 +2,7 @@ using Booking.Core.Application.Companies;
 using Booking.Core.Application.Companies.Commands;
 using Booking.Core.Application.Identities;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.Core.Api.Endpoints;
 
@@ -13,7 +14,7 @@ public static class CompanyEndpoints
             .WithTags("Company");
         
         companyGroup.MapGet("{id:long}", async (
-            ICompanyRepository repository,
+            [FromServices] ICompanyRepository repository,
             long id,
             CancellationToken cancellationToken = default
         ) =>
@@ -28,8 +29,8 @@ public static class CompanyEndpoints
         });
 
         companyGroup.MapPost("/", async (
-            IMediator mediator,
-            CreateCompanyCommand command,
+                [FromServices] IMediator mediator,
+            [FromBody] CreateCompanyCommand command,
             CancellationToken cancellationToken = default
             ) =>
             {
@@ -40,12 +41,11 @@ public static class CompanyEndpoints
                 }
                 
                 return Results.BadRequest();
-            })
-            .RequireAuthorization(AuthorizationPolicies.AdminPolicy);
+            });
         
         companyGroup.MapPut("/", async (
-            IMediator mediator,
-            UpdateCompanyCommand command,
+            [FromServices] IMediator mediator,
+            [FromBody] UpdateCompanyCommand command,
             CancellationToken cancellationToken = default
             ) =>
             {

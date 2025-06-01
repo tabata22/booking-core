@@ -1,12 +1,14 @@
+using Booking.Core.Domain.BranchAggregate;
 using Booking.Core.Domain.CompanyAggregate;
+using Booking.Core.Domain.EmployeeAggregate;
 
 namespace Booking.Core.Domain.ServiceAggregate;
 
 public class Service : AuditableEntity
 {
-    public Service(long companyId, string name, string? description, decimal price, int duration)
+    public Service(long branchId, string name, string? description, decimal price, int duration)
     {
-        CompanyId = companyId;
+        BranchId = branchId;
         Name = name;
         Description = description;
         Price = price;
@@ -17,7 +19,7 @@ public class Service : AuditableEntity
 
     public long Id { get; private set; }
     
-    public long CompanyId { get; private set; }
+    public long BranchId { get; private set; }
     
     public string Name { get; private set; }
     
@@ -27,5 +29,15 @@ public class Service : AuditableEntity
     
     public int Duration { get; private set; }
     
-    public Company Company { get; private set; }
+    public Branch Branch { get; private set; }
+    
+    public ICollection<EmployeeService> EmployeeServices { get; private set; }
+
+    public void Update(string name, string? description, decimal price, int duration)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+        Duration = duration;
+    }
 }

@@ -18,6 +18,7 @@ public class DomainEventInterceptor: SaveChangesInterceptor
         int result,
         CancellationToken cancellationToken = default)
     {
+        return result;
         var context = eventData.Context;
         if (context == null) 
             return result;

@@ -33,11 +33,18 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
             .FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
+    public async Task<TEntity?> GetForUpdateAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext
+            .Set<TEntity>()
+            .FindAsync([id], cancellationToken);
+    }
+
     public async Task<TEntity?> GetForUpdateAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
         return await _dbContext
             .Set<TEntity>()
-            .FirstOrDefaultAsync(cancellationToken);
+            .FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
     public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
@@ -46,6 +53,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
             .Set<TEntity>()
             .AsNoTracking()
             .AnyAsync(predicate, cancellationToken);
+    }
+
+    public void Delete(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Remove(entity);
     }
 
     public async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)

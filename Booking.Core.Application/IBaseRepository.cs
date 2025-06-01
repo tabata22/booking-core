@@ -11,9 +11,13 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     
     Task<TEntity?> GetOneAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     
+    Task<TEntity?> GetForUpdateAsync(long id, CancellationToken cancellationToken = default);
+    
     Task<TEntity?> GetForUpdateAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+    
+    void Delete(TEntity entity);
     
     Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     

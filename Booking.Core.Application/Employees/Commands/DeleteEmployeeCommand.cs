@@ -1,7 +1,9 @@
 using CSharpFunctionalExtensions;
 using MediatR;
 
-namespace Booking.Core.Application.Employees.Delete;
+namespace Booking.Core.Application.Employees.Commands;
+
+public record DeleteEmployeeCommand(long Id) : IRequest<Result>;
 
 public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Result>
 {

@@ -1,6 +1,6 @@
-namespace Booking.Core.Domain.CompanyAggregate;
+namespace Booking.Core.Domain.BranchAggregate;
 
-public record CompanyAddress(
+public record BranchAddress(
     string Address, 
     double? Latitude,
     double? Longitude, 

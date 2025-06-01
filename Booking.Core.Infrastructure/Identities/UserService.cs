@@ -12,6 +12,6 @@ public class UserService : IUserService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public Guid UserId => Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+    public Guid UserId => Guid.Parse("dfbb7460-de34-46e6-b1b8-01494ce41833");
     public long CompanyId { get; }
 }
