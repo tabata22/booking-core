@@ -13,4 +13,5 @@ public class UserService : IUserService
     }
 
     public Guid UserId => Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+    public long CompanyId { get; }
 }

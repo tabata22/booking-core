@@ -1,8 +1,8 @@
 using Booking.Core.Domain.CompanyAggregate;
 
-namespace Booking.Core.Application.Companies.Models;
+namespace Booking.Core.Application.Companies.Queries;
 
-public class CompanyModel
+public class GetCompanyDto
 {
     public long Id { get; set; }
     

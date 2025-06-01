@@ -2,8 +2,18 @@ using Booking.Core.Domain.CompanyAggregate;
 using CSharpFunctionalExtensions;
 using MediatR;
 
-namespace Booking.Core.Application.Companies.Create;
+namespace Booking.Core.Application.Companies.Commands;
 
+public record CreateCompanyCommand(
+    string IdentificationCode,
+    string Name,
+    CompanyActivityType CompanyActivityType,
+    string? Description,
+    string Address, 
+    double? Latitude,
+    double? Longitude, 
+    string? GoogleMapPlaceId) : IRequest<Result>;
+    
 public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, Result>
 {
     private readonly ICompanyRepository _repository;
@@ -22,6 +32,7 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
         }
 
         var company = new Company(
+            1,
             command.IdentificationCode,
             command.Name,
             command.CompanyActivityType,
@@ -31,18 +42,7 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
             command.Latitude,
             command.Longitude,
             command.GoogleMapPlaceId
-            );
-
-        foreach (var serviceId in command.Services)
-        {
-            var companyService = new CompanyService
-            {
-                Id = Guid.NewGuid(),
-                ServiceId = serviceId
-            };
-            
-            company.AddService(companyService);
-        }
+        );
         
         await _repository.AddAsync(company, cancellationToken);
         await _repository.SaveAsync(cancellationToken);

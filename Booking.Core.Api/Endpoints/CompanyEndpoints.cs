@@ -1,6 +1,5 @@
 using Booking.Core.Application.Companies;
-using Booking.Core.Application.Companies.Create;
-using Booking.Core.Application.Companies.Update;
+using Booking.Core.Application.Companies.Commands;
 using Booking.Core.Application.Identities;
 using MediatR;
 
@@ -57,17 +56,6 @@ public static class CompanyEndpoints
                 }
                 
                 return Results.BadRequest();
-            });
-        
-        companyGroup.MapGet("{id:long}/services", async (
-            ICompanyQuery query,
-            long id,
-            CancellationToken cancellationToken = default
-            ) =>
-            {
-                var services = await query.GetCompanyServicesAsync(id, cancellationToken);
-                
-                return Results.Ok(services);
             });
         
         return companyGroup;

@@ -1,5 +1,6 @@
 using Booking.Core.Domain.CompanyAggregate.Events;
 using Booking.Core.Domain.CustomerAggregate;
+using Booking.Core.Domain.PackageAggregate;
 using Booking.Core.Domain.ServiceAggregate;
 
 namespace Booking.Core.Domain.CompanyAggregate;
@@ -7,6 +8,7 @@ namespace Booking.Core.Domain.CompanyAggregate;
 public class Company : BaseEntity
 {
     public Company(
+        long packageId,
         string identificationCode,
         string name, 
         CompanyActivityType activityType,
@@ -17,6 +19,7 @@ public class Company : BaseEntity
         double? longitude, 
         string? googleMapPlaceId)
     {
+        PackageId = packageId;
         IdentificationCode = identificationCode;
         Name = name;
         Status = CompanyStatus.Pending;
@@ -32,6 +35,8 @@ public class Company : BaseEntity
 
     public long Id { get; private set; }
     
+    public long PackageId { get; private set; }
+    
     public string IdentificationCode { get; private set; }
     
     public string Name { get; private set; }
@@ -46,14 +51,14 @@ public class Company : BaseEntity
     
     public CompanyAddress Address { get; private set; }
     
-    public ICollection<Customer> Customers { get; private set; }
+    public Package Package { get; private set; }
     
-    public ICollection<CompanyService> Services { get; private set; }
+    public ICollection<Customer> Customers { get; private set; }
     
     public ICollection<Branch> Branches { get; private set; }
     
-    public void AddService(CompanyService service) => Services.Add(service);
-
+    public ICollection<Service> Services { get; private set; }
+    
     public void Activate()
     {
         Status = CompanyStatus.Active;

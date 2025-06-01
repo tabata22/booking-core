@@ -1,4 +1,5 @@
-using Booking.Core.Application.Services;
+using Booking.Core.Application.Identities;
+using Booking.Core.Application.Services.Queries;
 
 namespace Booking.Core.Api.Endpoints;
 
@@ -10,11 +11,12 @@ public static class ServiceEndpoints
             .WithTags("Service");
 
         serviceGroup.MapGet("/", async (
-            IServiceQuery query,
+            IServiceQueries queries,
+            IUserService userService,
             CancellationToken cancellationToken = default
             ) =>
             {
-                var services = await query.GetAll(cancellationToken);
+                var services = await queries.GetAll(userService.CompanyId, cancellationToken);
                 
                 return Results.Ok(services);
             });
