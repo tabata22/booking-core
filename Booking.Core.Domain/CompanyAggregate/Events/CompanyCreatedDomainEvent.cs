@@ -1,3 +1,3 @@
 namespace Booking.Core.Domain.CompanyAggregate.Events;
 
-public record CompanyCreatedDomainEvent() : IDomainEvent;
+public record CompanyCreatedDomainEvent(long Id) : IDomainEvent;

@@ -8,6 +8,7 @@ public record CreateCompanyCommand(
     long PackageId,
     string IdentificationCode,
     string Name,
+    string Email,
     CompanyActivityType CompanyActivityType,
     string? Description) : IRequest<Result>;
     
@@ -32,6 +33,7 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
             command.PackageId,
             command.IdentificationCode,
             command.Name,
+            command.Email,
             command.CompanyActivityType,
             null,
             command.Description

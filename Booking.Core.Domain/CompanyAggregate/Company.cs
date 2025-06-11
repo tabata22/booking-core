@@ -2,7 +2,6 @@ using Booking.Core.Domain.BranchAggregate;
 using Booking.Core.Domain.CompanyAggregate.Events;
 using Booking.Core.Domain.CustomerAggregate;
 using Booking.Core.Domain.PackageAggregate;
-using Booking.Core.Domain.ServiceAggregate;
 
 namespace Booking.Core.Domain.CompanyAggregate;
 
@@ -11,7 +10,8 @@ public class Company : AuditableEntity
     public Company(
         long packageId,
         string identificationCode,
-        string name, 
+        string name,
+        string email,
         CompanyActivityType activityType,
         Guid? logoUrl, 
         string? description)
@@ -19,12 +19,13 @@ public class Company : AuditableEntity
         PackageId = packageId;
         IdentificationCode = identificationCode;
         Name = name;
+        Email = email;
         Status = CompanyStatus.Pending;
         ActivityType = activityType;
         LogoUrl = logoUrl;
         Description = description;
         
-        RaiseEvent(new CompanyCreatedDomainEvent());
+        RaiseEvent(new CompanyCreatedDomainEvent(Id));
     }
     
     private Company() {}
@@ -36,6 +37,8 @@ public class Company : AuditableEntity
     public string IdentificationCode { get; private set; }
     
     public string Name { get; private set; }
+    
+    public string Email { get; private set; }
     
     public CompanyStatus Status { get; private set; }
     
